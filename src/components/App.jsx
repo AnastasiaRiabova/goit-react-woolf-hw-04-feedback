@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { FeedbackOptions } from './Feedback';
 import { Statistics } from './Statistics';
 import { Section } from './Section';
@@ -11,18 +11,13 @@ const App = () => {
     bad: 0,
   });
 
-  const totalFeedback = useMemo(
-    () => Object.values(feedback).reduce((acc, curr) => acc + curr, 0),
-    [feedback]
+  const totalFeedback = Object.values(feedback).reduce(
+    (acc, curr) => acc + curr,
+    0
   );
 
-  const positivePercentage = useMemo(
-    () =>
-      feedback.good === 0
-        ? 0
-        : Math.round((feedback.good / totalFeedback) * 100),
-    [totalFeedback, feedback.good]
-  );
+  const positivePercentage =
+    feedback.good === 0 ? 0 : Math.round((feedback.good / totalFeedback) * 100);
 
   const onLeaveFeedback = option => {
     setFeedback(prevFeedback => ({
